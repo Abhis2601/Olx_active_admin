@@ -5,7 +5,7 @@ ActiveAdmin.register Purchase do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  # permit_params :user_id, :product_id
+   permit_params :user_id, :product_id
   #
   # or
   #
