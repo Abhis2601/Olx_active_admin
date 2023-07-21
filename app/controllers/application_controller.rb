@@ -1,12 +1,3 @@
-class ApplicationController < ApiController
-	def index 
-		categories = Category.all
-		render json: categories, status: :ok
-	end
+class ApplicationController < ActionController::Base
 
-	
-	def category_wise_product
-		categories = Product.where(status:"available").group(:category_id)
-		render json: categories
-	end
 end

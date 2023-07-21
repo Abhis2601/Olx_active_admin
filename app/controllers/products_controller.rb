@@ -69,7 +69,7 @@ class ProductsController < ApiController
 	private
 
 	def products_params
-		params.permit(:name, :price, :description, :image, :category_id)
+		params.permit(:name, :price,  :description, :image, :category_id)
 	end
 
 	def check_render(product)

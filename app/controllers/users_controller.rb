@@ -1,7 +1,8 @@
 class UsersController < ApiController
-	skip_before_action :authenticate_request ,only:[:create] 
+	skip_before_action :authenticate_request ,only: [:create] 
 	
 	def create
+		# byebug
 	  user = User.new(params_user)
 	  if user.save
 		 token =  jwt_encode(user_id: user.id)
