@@ -29,7 +29,7 @@ class ProductsController < ApiController
   	product = check_product(params[:id])
 		if product.present? 
 			if product.destroy
-  			render json: { product: product, message:'Delete Sucessfully' }, status: :ok
+  			render json: { product: product, message: 'Delete Sucessfully' }, status: :ok
 			else
 				render json: { errors: product.errors.full_messages }, status: :unprocessable_entity
 			end
@@ -55,7 +55,7 @@ class ProductsController < ApiController
 		# product = Product.available.find_by("name like ?","%#{params[:name]}%")
 		 product = Product.available.find_by(id:params[:id])
      if product.present?
-		 	render json:product, status: :ok
+		 	render json: product, status: :ok
 		 else
 		 	render josn: { message: "Please give valid id"}, status: :unprocessable_entity
 		 end

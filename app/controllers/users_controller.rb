@@ -1,8 +1,7 @@
 class UsersController < ApiController
-	skip_before_action :authenticate_request ,only: [:create] 
+	skip_before_action :authenticate_request, only: [:create, :login] 
 	
 	def create
-		# byebug
 	  user = User.new(params_user)
 	  if user.save
 		 token =  jwt_encode(user_id: user.id)
@@ -14,7 +13,7 @@ class UsersController < ApiController
 
 	def update
 		if @current_user.update(params_user)
- 			render json: { user: @current_user, message: "Update Sucessfully..." }, status: :created
+ 			render json: {  user:@current_user,message:"Update Sucessfully..." }, status: :created
  		else
  		  render json:{ errors: @current_user.errors.full_messages }, status: :unprocessable_entity
 		end
@@ -23,6 +22,20 @@ class UsersController < ApiController
 	def index
 		users = User.all
 		render json: users
+	end
+
+	def login
+		if params[:email].present?
+			user = User.find_by(email:params[:email])
+			if user.present? && user.password == params[:password] 
+				token = jwt_encode(user_id: user.id)
+				render json: { token:token }, status:	:ok
+			else
+				render json: { error:'unauthorized' }, status: :unauthorized
+			end
+		else
+			render json: { message:"email can't be blank" }, status: :unauthorized
+		end
 	end
 
 	private

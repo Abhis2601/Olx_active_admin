@@ -5,20 +5,20 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
-
-  post'login', to:'authentication#login'
-
-  get 'current_user_products', to:'products#current_user_products'
-
-  get 'current_user_sold_products', to:'purchases#current_user_sold_products'
   
-  get 'category_wise', to:'categories#category_wise_product'
-  
-  resource :users
+  resource :users do 
+    post 'login', on: :collection 
+  end
 
-  resources :products
+  resources :products do
+    get'current_user_products', on: :collection
+  end
 
-  resources :purchases  
+  resources :purchases  do 
+    get 'current_user_sold_products', on: :collection
+  end
 
-  resources :categories
+  resources :categories do
+    get 'category_wise', on: :collection
+  end
 end
