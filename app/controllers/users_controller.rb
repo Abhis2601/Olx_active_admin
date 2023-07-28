@@ -1,6 +1,7 @@
 class UsersController < ApiController
 	skip_before_action :authenticate_request, only: [:create, :login] 
-	
+	# load_and_authorize_resource 
+
 	def create
 	  user = User.new(params_user)
 	  if user.save
@@ -12,7 +13,7 @@ class UsersController < ApiController
 	end
 
 	def update
-		if @current_user.update(params_user)
+		if @current_user.update(params_user).accessible_by(current_ability)
  			render json: {  user:@current_user,message:"Update Sucessfully..." }, status: :created
  		else
  		  render json:{ errors: @current_user.errors.full_messages }, status: :unprocessable_entity

@@ -5,7 +5,7 @@ class CategoriesController < ApiController
 	end
 
 	def category_wise
-		categories = Product.where(status:"available").group(:category_id)
+		categories = Product.available.group(:category_id)
 		render json: categories, status: :ok 
 	end
 end

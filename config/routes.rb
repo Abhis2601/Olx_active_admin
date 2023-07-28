@@ -12,10 +12,12 @@ Rails.application.routes.draw do
 
   resources :products do
     get'current_user_products', on: :collection
+    put'update_product',on: :member
   end
 
   resources :purchases  do 
     get 'current_user_sold_products', on: :collection
+    post 'mail_send', on: :collection
   end
 
   resources :categories do

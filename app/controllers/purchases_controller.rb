@@ -1,46 +1,41 @@
 class PurchasesController < ApiController
+	before_action :check_render, only: [:index, :current_user_sold_products]
+	load_and_authorize_resource 
+
 	def create
-		products = Product.available.where.not(user_id: @current_user.id)
-		product = products.find_by(id:params[:id])
-		if products.present? && product.present?
-			purchase = @current_user.purchases.new(product_id: product.id)
-			if purchase.save
-				product.sold!
-				render json: purchase, status: :created
-			else
-				render json: { errors: purchase.errors.full_messages }, status: :unprocessable_entity
-			end
-		else
-			render json: { message:"Product not found" }, status: :not_found
-		end
+		product = Product.available.find_by(id:params[:id]).accessible_by(current_ability)
+		purchase = @current_user.purchases.new(product_id: product.id)
+	 	purchase.save
+		product.sold!
+		render json: purchase, status: :created
 	end
 
 	def index
-		if params[:product_id].present?
-			purchase = @current_user.purchases.find_by(product_id: params[:product_id])
-			check_render(purchase)
-		else
-			purchases = @current_user.purchases
-			check_render(purchases)
-		end
+		@purchases = if params[:id].present?
+									 Purchase.find_by(product_id: params[:id]).accessible_by(current_ability)
+								else
+									@current_user.purchases
+								end
 	end
 
 	def current_user_sold_products
-		products = @current_user.products.sold
-		if products.present?
-			render json: products, status: :ok 
-		else
-			render json:{ message:"No Record found" }, status: :not_found
-		end
+		@purchases = @current_user.products.sold 
 	end
 
+	def mail_send
+		byebug
+			@email = params[:email]
+		UserMailer.with(email:@email).welcome_email.deliver_now
+		render json:{message:"Mail sent sucessfully...."}
+	end
+	
 	private
 
-	def check_render(purchase)
-		if purchase.present?
-			render json: purchase, status: :ok 
+	def check_render
+		if @purchases.present?
+			render json: @purchases, status: :ok
 		else
-			render json: { message:"No purchase" }, status: :not_found
+			render json: {message:"NO PURCHASE"}, status: :not_found
 		end
 	end
 end
