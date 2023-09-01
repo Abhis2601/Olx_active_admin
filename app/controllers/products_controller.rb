@@ -1,10 +1,11 @@
 class ProductsController < ApiController
-	before_action :check_product, only:[:update, :destroy]
-	before_action :check_render, only:[:current_user_products, :index]
-	load_and_authorize_resource 
+	# before_action :check_product, only:[:update, :destroy]
+	# before_action :check_render, only:[:current_user_products, :index]
+	# load_and_authorize_resource 
 
 	def create
-		product = @current_user.products.new(products_params)
+		# byebug
+		product = Product.new(products_params)
 		product.alphanumeric_id = generate_alphanumeric(params[:name])
 		if product.save 
 			product.available!
@@ -49,7 +50,7 @@ class ProductsController < ApiController
 	private
 
 	def products_params
-		params.permit(:name, :price, :description, :category_id, :product_image)
+		params.permit(:name, :price, :description, :category_id, :user_id, :product_image)
 	end
 
 	def generate_alphanumeric(value)

@@ -5,8 +5,8 @@ class UsersController < ApiController
 	def create
 	  user = User.new(params_user)
 	  if user.save
-		 token =  jwt_encode(user_id: user.id)
-		 render json: { user: user, token: token }, status: :created
+		 # token =  jwt_encode(user_id: user.id)
+		 render json: { user: user }, status: :created
 	  else
 		 render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
 	  end
