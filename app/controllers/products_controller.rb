@@ -49,7 +49,7 @@ class ProductsController < ApiController
 	private
 
 	def products_params
-		params.permit(:name, :price, :description, :category_id)
+		params.permit(:name, :price, :description, :category_id, :product_image)
 	end
 
 	def generate_alphanumeric(value)

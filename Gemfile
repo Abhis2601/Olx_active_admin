@@ -49,7 +49,7 @@ gem"active_model_serializers"
 gem"devise"
 gem "cancancan"
 # gem"active_admin"
-gem "byebug"
+# gem "byebug"
 gem 'activeadmin'
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
@@ -57,6 +57,11 @@ gem 'activeadmin'
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem 'byebug', platform: :mri
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
+  gem 'capybara'
+  gem 'database_cleaner'
 end
 
 group :development do
