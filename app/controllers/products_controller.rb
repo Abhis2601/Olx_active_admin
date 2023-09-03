@@ -1,6 +1,6 @@
 class ProductsController < ApiController
 	# before_action :check_product, only:[:update, :destroy]
-	# before_action :check_render, only:[:current_user_products, :index]
+	before_action :check_render, only:[:current_user_products, :index]
 	# load_and_authorize_resource 
 
 	def create

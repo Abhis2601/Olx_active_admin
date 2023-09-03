@@ -1,5 +1,5 @@
 class Product < ApplicationRecord
-  validates :name, :description, :price, :alphanumeric_id, presence: true
+  validates :name, :description, :price, presence: true
   belongs_to :category
   belongs_to :user
   has_one :purchase

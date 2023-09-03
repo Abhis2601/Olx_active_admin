@@ -7,7 +7,7 @@ FactoryBot.define do
     association :category, factory: :category
     association :user, factory: :user
     # product_image {fixture_file_upload(Rails.root.join("spec/support/images/ghar.jpeg"),'image/jpeg')}
-    product_image {Rack::Test::UploadedFile.new(Rails.root.join("spec/support/images/ghar.jpeg"),'image/jpeg')}
+    # product_image {Rack::Test::UploadedFile.new(Rails.root.join("spec/support/images/ghar.jpeg"),'image/jpeg')}
 
   end
 end
