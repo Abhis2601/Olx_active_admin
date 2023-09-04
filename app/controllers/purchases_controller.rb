@@ -22,12 +22,12 @@ class PurchasesController < ApiController
 		@purchases = @current_user.products.sold 
 	end
 
-	def mail_send
-		byebug
-			@email = params[:email]
-		UserMailer.with(email:@email).welcome_email.deliver_now
-		render json:{message:"Mail sent sucessfully...."}
-	end
+	# def mail_send
+	# 	byebug
+	# 		@email = params[:email]
+	# 	UserMailer.with(email:@email).welcome_email.deliver_now
+	# 	render json:{message:"Mail sent sucessfully...."}
+	# end
 	
 	private
 

@@ -4,6 +4,7 @@ FactoryBot.define do
     name {'Laptop'}
     price {35000} 
     description { "this is newly laptop"}
+    status {"available"}
     association :category, factory: :category
     association :user, factory: :user
     # product_image {fixture_file_upload(Rails.root.join("spec/support/images/ghar.jpeg"),'image/jpeg')}

@@ -63,6 +63,7 @@ group :development, :test do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'faker'
+  gem 'simplecov', require: false, group: :test
 end
 
 group :development do

@@ -2,21 +2,21 @@ class ApiController < ActionController::API
 	include JsonWebToken
  before_action :authenticate_request 
 
- rescue_from CanCan::AccessDenied do |exception|
- 	render json:{message:exception}
- end
+ # rescue_from CanCan::AccessDenied do |exception|
+ # 	render json:{message:exception}
+ # end
  
  # def current_user
  # 	@current_user
  # end
 
- rescue_from ActiveRecord::RecordNotFound do |exception|
- 	render json:{message:exception}
- end
+ # rescue_from ActiveRecord::RecordNotFound do |exception|
+ # 	render json:{message:exception}
+ # end
 
- rescue_from NoMethodError do |exception|
- 	render json:{message:exception}
- end
+ # rescue_from NoMethodError do |exception|
+ # 	render json:{message:exception}
+ # end
  
 	def authenticate_request
 		begin

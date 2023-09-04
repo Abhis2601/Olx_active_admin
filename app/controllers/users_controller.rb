@@ -13,8 +13,8 @@ class UsersController < ApiController
 	end
 
 	def update
-		if @current_user.update(params_user).accessible_by(current_ability)
- 			render json: {  user:@current_user,message:"Update Sucessfully..." }, status: :created
+		if @current_user.update(params_user)#.accessible_by(current_ability)
+ 			render json: {  user:@current_user,message:"Update Sucessfully..." }, status: :ok
  		else
  		  render json:{ errors: @current_user.errors.full_messages }, status: :unprocessable_entity
 		end
