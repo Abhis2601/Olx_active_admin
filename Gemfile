@@ -64,6 +64,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'faker'
   gem 'simplecov', require: false, group: :test
+  gem 'shoulda-matchers'
 end
 
 group :development do

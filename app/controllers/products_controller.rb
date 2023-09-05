@@ -46,7 +46,6 @@ class ProductsController < ApiController
 	end
 
 	def current_user_products
-		byebug
 		products = @current_user.products.available
 		if products.present?
 			render json: products, status: :ok

@@ -15,10 +15,6 @@ RSpec.describe ProductsController, type: :controller do
 		request.headers['Authorization'] = "#{@token}"
 	end
 
-	
-
-	
-		
 		describe 'POST #create' do
 
 			context 'without token' do
@@ -140,11 +136,7 @@ RSpec.describe ProductsController, type: :controller do
 			  end
 
 				context 'current user has products' do 
-					# before do 
-						# product = Product.where(user_id: user.id) 
-					# end
-
-			  	it 'Returns all product of current user which status is available' do 
+		  		it 'Returns all product of current user which status is available' do 
 			  		authenticate_user
 			  		products = FactoryBot.create(:product, user_id:user.id)
 			  		get :current_user_products
@@ -168,7 +160,6 @@ RSpec.describe ProductsController, type: :controller do
 			context 'update product with token ' do 
 				it 'Returns update successfully' do
 					authenticate_user 
-					# byebug
 					patch :update,
 					params:{id:product.id, name:"bhanu"}
 					product = JSON.parse(response.body) 
